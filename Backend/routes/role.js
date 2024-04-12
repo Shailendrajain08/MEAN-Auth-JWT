@@ -1,19 +1,16 @@
 const express = require('express');
-const Role = require('../models/Role')
-
+const { createRole, updateRole, getAllRole, deleteRole } = require('../controllers/role.controller');
 const router = express.Router();
 
 // create a new role 
-router.post('/', async (req, res, next) => {
-    try {
-        if(req.body.role && req.body.role !== ""){
-            const newRole = new Role(req.body);
-            await newRole.save();
-            return res.send("Role Created!")
-        }else{
-            return res.status(400).send("Bad Request")
-        }
-    } catch (error) {
-        return res.status(500).send("Internal Server Error")
-    }
-})
+router.post('/create', createRole)
+
+//update a role 
+router.put('/update/:id', updateRole)
+
+// get all roles 
+router.get('/getRole', getAllRole)
+
+router.delete('/deleteRole/:id', deleteRole)
+
+module.exports = router;

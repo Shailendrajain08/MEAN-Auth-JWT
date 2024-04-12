@@ -1,8 +1,14 @@
 const express = require('express')
 const db = require('mongoose')
 const app = express();
-const dotenv = require('dotenv')
+const router = require('./routes/role')
+const dotenv = require('dotenv');
+
 dotenv.config();
+
+app.use(express.json())
+
+app.use("/api/role", router)
 
 const connectMongoDb = async () => {
     try {
@@ -12,8 +18,6 @@ const connectMongoDb = async () => {
 
     }
 }
-
-// app.use("")
 
 const { default: mongoose } = require('mongoose');
 

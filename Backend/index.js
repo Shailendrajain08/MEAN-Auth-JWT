@@ -1,14 +1,16 @@
 const express = require('express')
 const db = require('mongoose')
 const app = express();
-const router = require('./routes/role')
+const roleRouter = require('./routes/role')
+const authRouter = require('./routes/auth')
 const dotenv = require('dotenv');
 
 dotenv.config();
 
 app.use(express.json())
 
-app.use("/api/role", router)
+app.use("/api/role", roleRouter)
+app.use("/api/auth", authRouter)
 
 const connectMongoDb = async () => {
     try {

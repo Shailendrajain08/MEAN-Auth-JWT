@@ -6,7 +6,6 @@ const createRole = async (req, res, next) => {
     try {
         if (req.body.role && req.body.role !== "") {
             const newRole = new Role(req.body);
-            
             await newRole.save();
             return next(CreateSuccess(200, "Role Created!"));
         } else {

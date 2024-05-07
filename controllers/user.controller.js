@@ -5,7 +5,6 @@ const CreateSuccess = require("../utils/success");
 const getAllUser = async (req, res, next) => {
     try{
         const users = await User.find();
-        console.log(users)
         return next(CreateSuccess(200, "All Users", users)); 
     }catch(error){
         return next(CreateError(500, "Internal Server Error!"))

@@ -6,11 +6,17 @@ const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config();
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}
+))
 app.use("/api/role", roleRouter )
 app.use("/api/auth", authRouter )
 app.use("/api/user", userRouter )

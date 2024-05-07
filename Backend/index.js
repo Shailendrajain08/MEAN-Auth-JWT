@@ -29,13 +29,12 @@ app.use((obj, req, res, next) => {
 
 const connectMongoDb = async () => {
     try {
-        await mongoose.connect(process.env.DB_URL)
+        await db.connect(process.env.DB_URL)
         console.log("connected to database")
     }catch (error) {
-
+        console.log(error)
     }
 }
-
 
 app.listen(8000, () => {
     connectMongoDb();

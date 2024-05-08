@@ -4,9 +4,11 @@ const app = express();
 const roleRouter = require('./routes/role');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
+const bookRouter = require('./routes/book');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const { seedBooksData } = require('./seed')
 
 dotenv.config();
 
@@ -20,6 +22,7 @@ app.use(cors({
 app.use("/api/role", roleRouter )
 app.use("/api/auth", authRouter )
 app.use("/api/user", userRouter )
+app.use("/api/book", bookRouter)
 
 // Response handler middleware
 app.use((obj, req, res, next) => {
@@ -35,7 +38,10 @@ app.use((obj, req, res, next) => {
 
 const connectMongoDb = async () => {
     try {
-        await db.connect(process.env.DB_URL)
+        await db.connect(process.env.DB_URL);
+        if(process.argv.includes("--seed")){
+            await seedBooksData();
+        }
         console.log("connected to database")
     }catch (error) {
         console.log(error)

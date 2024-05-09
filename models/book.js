@@ -22,6 +22,14 @@ const BookSchema = mongoose.Schema (
         url: {
             type:String,
             require:true
+        },
+        author: {
+            type:String,
+            require:true
+        },
+        details: {
+            type:String,
+            require:true
         }
     }
 );
